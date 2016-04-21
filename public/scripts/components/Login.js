@@ -21,7 +21,9 @@ export default React.createClass({
 			<h1>log in!</h1>
 			<form onSubmit={this.login}>
 				<input type="text" placeholder="email" ref="email" />
+				<div className='error'>{this.state.errors.email ? this.state.errors.email.message : null}</div>
 				<input type="password" placeholder="password" ref="password" />
+				<div className='error'>{this.state.errors.password ? this.state.errors.password.message : null}</div>
 				<button type="submit">log in!</button>
 			</form>
 		</section>
@@ -30,12 +32,13 @@ export default React.createClass({
 	login: function(e) {
 		e.preventDefault();
 		$.ajax({
-			url: 'auth/login',
+			url: '/auth/login',
 			type: 'POST',
 			data: {
 				email: this.refs.email.value,
-				passwords: this.refs.password.value
+				password: this.refs.password.value
 			},
+
 			headers: {
 				Accept: 'application/json'
 			},
@@ -47,7 +50,7 @@ export default React.createClass({
 
 			error: (errorArg) => {
 				console.log(this.state);
-				this.setState({errors: errorArg.response.JSON});
+				this.setState({errors: errorArg.responseJSON});
 			}
 
 		});

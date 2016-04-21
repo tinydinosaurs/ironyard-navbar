@@ -22,7 +22,9 @@ export default React.createClass({
 				<input type="text" placeholder="first name" ref="firstName" />
 				<input type="text" placeholder="last name" ref="lastName" />
 				<input type="text" placeholder="email" ref="email"/>
+				<div className='error'>{this.state.errors.email ? this.state.errors.email.message : null}</div>
 				<input type="password" placeholder="password" ref="password" />
+				<div className='error'>{this.state.errors.password ? this.state.errors.password.message : null}</div>
 				<button type="submit">register!</button>
 			</form>
 		</section>
